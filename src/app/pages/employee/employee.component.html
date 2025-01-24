@@ -3,134 +3,106 @@
         <div class="col-6">
             <h2>Employees</h2>
         </div>
-        <div class="col-6 text-end">
+        <div  class="col-6 text-end">
             <button class="btn btn-success" (click)="isFormVisiable.set(true)"> Add New</button>
         </div>
     </div>
-    @if(isFormVisiable()){
-    <form class="mb-4">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="employeeName" class="form-label">Employee Name</label>
-                <input type="text" class="form-control"  placeholder="Enter employee name">
+
+    <div *ngIf="isFormVisiable()">
+        <form class="mb-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="employeeName" class="form-label">Employee Name</label>
+                    <input type="text" class="form-control" name="employeeName" [(ngModel)]="employeeObj.employeeName" placeholder="Enter employee name">
+                </div>
+                <div class="col-md-4">
+                    <label for="contactNo" class="form-label">Contact No</label>
+                    <input type="text" class="form-control" name="contactNo" [(ngModel)]="employeeObj.contactNo" placeholder="Enter contact number">
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="contactNo" class="form-label">Contact No</label>
-                <input type="text" class="form-control"   placeholder="Enter contact number">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="emailId" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="emailId" [(ngModel)]="employeeObj.emailId" placeholder="Enter email">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Parent Department</label>
+                    <select class="form-select" [(ngModel)]="parentDeptId" name="parentDeptId" (change)="onParentDeptChange()">
+                        <option value="" disabled>Select Department</option>
+                        <option *ngFor="let item of parentDeptList()" [value]="item.departmentId">
+                            {{ item.departmentName }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Child Department</label>
+                    <select class="form-select" name="deptId" [(ngModel)]="employeeObj.deptId">
+                        <option value="" disabled>Select department</option>
+                        <option *ngFor="let item of childDeptList()" [value]="item.childDeptId">
+                            {{ item.departmentName }}
+                        </option>
+                    </select>
+                </div>
             </div>
-            
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="emailId" class="form-label">Email</label>
-                <input type="email" class="form-control"  placeholder="Enter email">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" [(ngModel)]="employeeObj.password" placeholder="Enter password">
+                </div>
+                <div class="col-md-4">
+                    <label for="role" class="form-label">Role</label>
+                    <input type="text" class="form-control" name="role" [(ngModel)]="employeeObj.role" placeholder="Enter role">
+                </div>
             </div>
-            
-            <div class="col-md-4">
-                <label  for="deptId" class="form-label">Parent Department</label>
-                <select id="deptId" class="form-select" name="parentDeptId" [(ngModel)]="parentDeptId" (change)="onParentDeptChange()" >
-                    <option selected>Select Department</option>
-                    @for(item of parentDeptList(); track $index){
-                        <option [value]="item.departmentId" >{{item.departmentName}}</option>
-                    }
-                    
-                
-                    <!-- Department options -->
-                </select>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select id="gender" class="form-select" name="gender" [(ngModel)]="employeeObj.gender">
+                        <option value="" disabled>Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="deptId" class="form-label">Child Department</label>
-                <select id="deptId" class="form-select" >
-                    <option selected>Select department</option>
-                    @for(item of childDeptList(); track $index){
-                        <option [value]="item.childDeptId" >{{item.departmentName}}</option>
-                    }
-                    <!-- Department options -->
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control"  placeholder="Enter password">
-            </div>
-            
-            <div class="col-md-4">
-                <label for="role" class="form-label">Role</label>
-                <input type="text" class="form-control"  placeholder="Enter role">
-            </div>
-        
-        </div> 
-        <div class="row">
-            <div class="col-md-4">
-                <label for="gender" class="form-label">Gender</label>
-                <select id="gender" class="form-select" name="gender" >
-                    <option selected>Select gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </div>
-    
-            <button type="button" class="btn btn-primary mt-3" >
-            
-                    
-            
-                Save Employee</button>
-        
-    
-        <button class="btn btn-success mt-3 mx-2" (click)="isFormVisiable.set(false)"> Close </button>
-    </form>
-}
- <!-- Employee Table --> 
- <table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Sr No</th>
-            <th>Name</th>
-            <th>Contact No</th>
-            <th>Email</th>
-            <th>Department</th>
-            <th>Role</th> 
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- @if (isLoader()) { -->
+            @if(this.employeeObj.employeeId == 0){
+                <button type="button" class="btn btn-primary mt-3" (click)="onSave()">Save Employee</button>
+            }@else{
+                <button type="button" class="btn btn-warning mt-3" (click)="onUpdate()">Update Employee</button>
+            }
+            <button type="button" class="btn btn-success mt-3 mx-2" (click)="isFormVisiable.set(false)">Close</button>
+        </form>
+    </div>
+
+    <!-- Employee Table -->
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td colspan="7" class="text-center">
-                    <div class=" text-muted"></div>
-                    <div class=" text-primary"></div>
-                    <div class=" text-success"></div>
-                    <div class="text-info"></div>
-                    <div class=" text-warning"></div>
-                    <div class=" text-danger"></div>
-                    <div class=" text-secondary"></div>
-                    <div class=" text-dark"></div>
-                    <div class=" text-light"></div>
+                <th>Sr No</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of employeeList(); let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.employeeName }}</td>
+                <td>{{ item.contactNo }}</td>
+                <td>{{ item.emailId }}</td>
+                <td>{{ item.deptId }}</td>
+                <td>{{ item.role }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="onEdit(item)">Edit</button>
+                    <button type="button" class="btn btn-danger mx-2" (click)="onDelete(item.employeeId)">Delete</button>
                 </td>
             </tr>
-        <!-- } @else { -->
-            <!-- @for (item of employeeList; track $index) {
-                <tr>
-                    <td>{{$index+1}}</td>
-                    <td>{{item.employeeName}}</td>
-                    <td>{{item.contactNo}}</td>
-                    <td>{{item.emailId}}</td>
-                    <td>{{item.deptId}}</td>
-                    <td>{{item.role}}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary mt-3" (click)="onEdit(item)">Edit</button>
-                        <button type="button" class="btn btn-danger mt-3 mx-2" (click)="onDelete(item.employeeId)">Delete</button>
-                    </td>
-                </tr>
-            } 
-        }-->
-       
-
-       
-        <!-- Data rows go here -->
-    </tbody>
-</table>
+        </tbody>
+    </table>
 </div>
