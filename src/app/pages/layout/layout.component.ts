@@ -4,6 +4,7 @@ import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-layout',
+  standalone: true,
   imports: [RouterOutlet, RouterLink],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'

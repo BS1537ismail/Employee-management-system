@@ -1,0 +1,89 @@
+<h2>Employee Information Form</h2>
+<form id="employeeForm" class="form-container" [formGroup]="projectForm">
+  <!-- Form Fields -->
+  <div class="form-group">
+    <label for="projectName">Project Name</label>
+    <input 
+      type="text" 
+      class="form-control"
+      id="projectName" 
+      name="projectName" 
+      placeholder="Enter Project Name" 
+      formControlName="projectName" 
+      required>
+  </div>
+  <div class="form-group">
+    <label for="clientName">Client Name</label>
+    <input 
+      type="text" 
+      class="form-control"
+      id="clientName" 
+      name="clientName" 
+      placeholder="Enter Client Name" 
+      formControlName="clientName" 
+      required>
+  </div>
+  <div class="form-group">
+    <label for="startDate">Start Date</label>
+    <input 
+      type="date" 
+      class="form-control"
+      id="startDate" 
+      name="startDate" 
+      formControlName="startDate" 
+      required>
+  </div>
+  <div class="form-group">
+    <label for="leadByEmpId">Lead By Employee ID</label>
+    <select class="form-select" formControlName="leadByEmpId">
+        <option value="" >Select</option>
+        @for (item of emplList$ | async; track $index) {
+            <option [value]="item.employeeId">{{item.employeeName}}</option>
+        }
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="contactPerson">Contact Person</label>
+    <input 
+      type="text" 
+      class="form-control"
+      id="contactPerson" 
+      name="contactPerson" 
+      placeholder="Enter Contact Person" 
+      formControlName="contactPerson" 
+      required>
+  </div>
+  <div class="form-group">
+    <label for="contactNo">Contact No.</label>
+    <input 
+      type="tel" 
+      id="contactNo" 
+      class="form-control"
+      name="contactNo" 
+      placeholder="Enter Contact Number" 
+      pattern="[0-9]{10}" 
+      formControlName="contactNo" 
+      required>
+  </div>
+  <div class="form-group">
+    <label for="emailId">Email Id</label>
+    <input 
+      type="text" 
+      class="form-control"
+      id="emailId" 
+      name="emailId" 
+      placeholder="Enter Email Id" 
+      formControlName="emailId" 
+      required>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="button-container">
+    @if(projectForm.controls['projectId'].value == 0){
+    <button type="button" (click)="onSaveProject()">Save Project</button>
+    }
+    @else {
+        <button type="button" (click)="onUpdateProject()">Update Project</button>
+    }
+  </div>
+</form>

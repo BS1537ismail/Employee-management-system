@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employee',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
