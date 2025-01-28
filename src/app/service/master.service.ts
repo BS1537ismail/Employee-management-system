@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiResponse, IProject } from '../model/interface/master';
+import { IApiResponse, IProject, IProjectEmployee } from '../model/interface/master';
 import { Employee } from '../model/class/Employee';
 
 @Injectable({
@@ -45,5 +45,18 @@ export class MasterService {
   }
   removeProjectById(id: number){
     return this.http.delete<IProject>(this.apiUrl + "/DeleteProject/" + id);
+  }
+
+  getProjectEmp(): Observable<IProjectEmployee[]> {
+    return this.http.get<IProjectEmployee[]>(this.apiUrl + "GetAllProjectEmployees");
+  }
+  saveProjectEmp(obj: IProjectEmployee): Observable<IProject> {
+    return this.http.post<IProject>(this.apiUrl + "CreateProjectEmployee", obj);
+  } 
+  updateProjectEmp(obj: IProjectEmployee): Observable<IProjectEmployee> {
+    return this.http.put<IProjectEmployee>(this.apiUrl + "UpdateProjectEmployee/"+obj.empProjectId, obj);
+  }
+  removeProjectEmpById(id: number): Observable<IProjectEmployee> {
+    return this.http.delete<IProjectEmployee>(this.apiUrl + "DeleteProjectEmployee/"+ id);
   }
 }
