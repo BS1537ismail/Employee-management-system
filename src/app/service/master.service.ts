@@ -46,4 +46,7 @@ export class MasterService {
   removeProjectById(id: number){
     return this.http.delete<IProject>(this.apiUrl + "/DeleteProject/" + id);
   }
+  getDashbvaordData(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + "GetDashboard");
+  }
 }

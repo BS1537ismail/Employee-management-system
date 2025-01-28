@@ -1,1 +1,101 @@
-<p>dashboard works!</p>
+
+<div class="container mt-5">
+    <!-- Overview Section -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="card text-white bg-primary">
+          <div class="card-body">
+            <h5 class="card-title">Total Employees</h5>
+            <p class="card-text">{{ dashboardData.totalEmployee }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-white bg-success">
+          <div class="card-body">
+            <h5 class="card-title">Total Projects</h5>
+            <p class="card-text">{{ dashboardData.totalProject }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Recent Employees Section -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header bg-warning">
+            <h5>Recent Employees</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Employee Name</th>
+                  <th>Contact No</th>
+                  <th>Email</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Gender</th>
+                  <th>Created Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let emp of dashboardData.recentEmployee; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ emp.employeeName }}</td>
+                  <td>{{ emp.contactNo }}</td>
+                  <td>{{ emp.emailId }}</td>
+                  <td>{{ emp.deptId }}</td>
+                  <td>{{ emp.role }}</td>
+                  <td>{{ emp.gender }}</td>
+                  <td>{{ emp.createdDate }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Recent Projects Section -->
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header bg-info">
+            <h5>Recent Projects</h5>
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Project Name</th>
+                  <th>Client Name</th>
+                  <th>Start Date</th>
+                  <th>Lead By</th>
+                  <th>Contact Person</th>
+                  <th>Contact No</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let proj of dashboardData.recentProjects; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ proj.projectName }}</td>
+                  <td>{{ proj.clientName }}</td>
+                  <td>{{ proj.startDate }}</td>
+                  <td>{{ proj.leadByEmpId }}</td>
+                  <td>{{ proj.contactPerson }}</td>
+                  <td>{{ proj.contactNo }}</td>
+                  <td>{{ proj.emailId }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
